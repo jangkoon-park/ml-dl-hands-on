@@ -1,12 +1,10 @@
 @echo off
 REM =========================================
-REM 각 프로젝트 폴더 안에 notebooks, src, data, results 생성
+REM 각 프로젝트 폴더 및 하위 폴더에 README.md 생성
 REM =========================================
 
-REM 최상위 경로 설정
 set "BASE_PATH=C:\Users\Owner\Documents\ml-dl-hands-on"
 
-REM 폴더 목록
 setlocal enabledelayedexpansion
 for %%F in (
 "Unsupervised_Learning_with_Clustering_Algorithms"
@@ -30,11 +28,20 @@ for %%F in (
 ) do (
     set "FOLDER=%%~F"
     if exist "%BASE_PATH%\!FOLDER!" (
-        echo [!FOLDER!] 서브폴더 생성 중...
-        mkdir "%BASE_PATH%\!FOLDER!\notebooks" 2>nul
-        mkdir "%BASE_PATH%\!FOLDER!\src" 2>nul
-        mkdir "%BASE_PATH%\!FOLDER!\data" 2>nul
-        mkdir "%BASE_PATH%\!FOLDER!\results" 2>nul
+        echo [!FOLDER!] 폴더 및 하위 README 생성 중...
+        
+        for %%S in (notebooks src data results) do (
+            mkdir "%BASE_PATH%\!FOLDER!\%%S" 2>nul
+            if not exist "%BASE_PATH%\!FOLDER!\%%S\README.md" (
+                echo # %%S folder in !FOLDER! > "%BASE_PATH%\!FOLDER!\%%S\README.md"
+                echo This folder contains files related to %%S. >> "%BASE_PATH%\!FOLDER!\%%S\README.md"
+            )
+        )
+
+        if not exist "%BASE_PATH%\!FOLDER!\README.md" (
+            echo # !FOLDER! > "%BASE_PATH%\!FOLDER!\README.md"
+            echo Project description goes here. >> "%BASE_PATH%\!FOLDER!\README.md"
+        )
     ) else (
         echo [WARN] 폴더 없음: !FOLDER!
     )
