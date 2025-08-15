@@ -128,7 +128,4 @@ This repository contains my portfolio-style practice projects for machine learni
 * **부동산 가격 예측 파이프라인**
   데이터 전처리, 특징 엔지니어링, 모델링을 통한 주택 가격 예측을 수행합니다.
 
----
 
-원하시면 제가 이 순서를 **README.md용 마크다운 형식으로 그대로 깔끔하게 붙여넣기 가능하게** 만들어 드릴 수 있습니다.
-그렇게 해 드릴까요?
